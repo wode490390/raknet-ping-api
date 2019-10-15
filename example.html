@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>RakNet-UnconnectedPing-API Example</title>
+<style>
+input {
+    width: 90%;
+}
+</style>
+</head>
+<body>
+API: <input id="api" value="http://127.0.0.1/"></input>
+<br>Host: <input id="host" value="play.easecation.net"></input>
+<br>Port: <input id="port" value="19132"></input>
+<br><button onclick="query()">Query</button>
+<div id="result"></div>
+<script>
+var query = function(){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", document.getElementById('api').value + "?host=" + document.getElementById('host').value + "&port=" + document.getElementById('port').value);
+    xhr.onload = function(){
+        document.getElementById('result').innerHTML = this.status === 200 ? xhr.response : 'Error: HTTP ' + this.status;
+    };
+    xhr.send();
+};
+</script>
+</body>
+</html>

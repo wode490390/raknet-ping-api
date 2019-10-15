@@ -1,0 +1,28 @@
+{
+  "name": "raknet-ping-api",
+  "version": "1.0.0",
+  "description": "RakNet UnconnectedPing API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wode490390/raknet-ping-api.git"
+  },
+  "keywords": [
+    "raknet",
+    "ping",
+    "protocol",
+    "minecraft",
+    "mcpe",
+    "mcbe",
+    "api"
+  ],
+  "author": "wode490390",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wode490390/raknet-ping-api/issues"
+  },
+  "homepage": "https://github.com/wode490390/raknet-ping-api"
+}
