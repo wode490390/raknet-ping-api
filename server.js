@@ -42,17 +42,21 @@ var app = function(request, response){
             }
             result = JSON.stringify(result);
 
-            response.setHeader('Access-Control-Allow-Origin', config.cors);
-            if (query.callback) {
-                response.writeHead(200, {
-                    'Content-Type': 'application/javascript'
-                });
-                response.end(`${query.callback}('${result}')`);
-            } else {
-                response.writeHead(200, {
-                    'Content-Type': 'application/json'
-                });
-                response.end(result);
+            try {
+                response.setHeader('Access-Control-Allow-Origin', config.cors);
+                if (query.callback) {
+                    response.writeHead(200, {
+                        'Content-Type': 'application/javascript'
+                    });
+                    response.end(`${query.callback}('${result}')`);
+                } else {
+                    response.writeHead(200, {
+                        'Content-Type': 'application/json'
+                    });
+                    response.end(result);
+                }
+            } catch (responded) {
+                response.end('');
             }
         };
 
@@ -79,6 +83,13 @@ var app = function(request, response){
                     switch (serverName.length) {
                         case 0:
                             break;
+                        default:
+                            if (serverName.length > 12) {
+                                result.extras = [];
+                                for (let i = 12, j = 0; i < serverName.length; i++, j++) {
+                                    result.extras[j] = serverName[i];
+                                }
+                            }
                         case 12:
                             result.ipv6Port = serverName[11];
                         case 11:
@@ -103,13 +114,6 @@ var app = function(request, response){
                             result.motd = serverName[1];
                         case 1:
                             result.game = serverName[0];
-                        default:
-                            if (serverName.length > 12) {
-                                result.extras = [];
-                                for (let i = 12, j = 0; i < serverName.length; i++, j++) {
-                                    result.extras[j] = serverName[i];
-                                }
-                            }
                     }
                     result.address = rinfo.address;
                     _finish();
